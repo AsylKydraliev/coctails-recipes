@@ -35,7 +35,7 @@ const socialConfig: SocialAuthServiceConfig = {
   providers: [
     {
       id: FacebookLoginProvider.PROVIDER_ID,
-      provider: new FacebookLoginProvider(environment.apiUrl, {
+      provider: new FacebookLoginProvider(environment.fbAppId, {
         scope: 'email,public_profile'
       })
     }
