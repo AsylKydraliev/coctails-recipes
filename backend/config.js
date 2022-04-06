@@ -6,7 +6,7 @@ module.exports = {
     rootPath,
     uploadPath: path.join(rootPath, 'public/uploads'),
     mongo: {
-        db: 'mongodb://localhost/app-music',
+        db: 'mongodb://localhost/cocktails-recipes',
         options: {useNewUrlParser: true},
     },
     facebook: {
