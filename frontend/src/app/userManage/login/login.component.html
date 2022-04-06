@@ -57,24 +57,12 @@
           (click)="fbLogin()"
           style="margin-top: 16px"
         >
-          <img src="assets/icons/fb.svg" alt="facebook logo">
+          <img src="assets/fb.svg" alt="facebook logo">
           &nbsp;&nbsp;
           <span class="btn_text">SIGN IN WITH FACEBOOK</span>
         </button>
         <mat-progress-bar mode="indeterminate" *ngIf="(fbLoading | async)"></mat-progress-bar>
 
-        <button
-          type="button"
-          mat-raised-button
-          color="default"
-          (click)="googleLogin()"
-          style="margin-top: 16px"
-        >
-          <img src="assets/icons/google.svg" alt="facebook logo">
-          &nbsp;&nbsp;
-          <span class="btn_text">SIGN IN WITH GOOGLE</span>
-        </button>
-        <mat-progress-bar mode="indeterminate" *ngIf="(googleLoading | async)"></mat-progress-bar>
       </form>
     </mat-card-content>
   </mat-card>

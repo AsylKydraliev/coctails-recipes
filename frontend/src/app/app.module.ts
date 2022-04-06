@@ -18,6 +18,17 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
+import { FlexModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { RolesDirective } from './directives/roles.directive';
+import { HasRolesDirective } from './directives/has-roles.directive';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -37,7 +48,10 @@ const socialConfig: SocialAuthServiceConfig = {
     LoginComponent,
     RegisterComponent,
     LayoutComponent,
-    FileInputComponent
+    FileInputComponent,
+    ValidateIdenticalDirective,
+    RolesDirective,
+    HasRolesDirective,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +65,15 @@ const socialConfig: SocialAuthServiceConfig = {
     MatSidenavModule,
     MatToolbarModule,
     MatMenuModule,
-    MatListModule
+    MatListModule,
+    FlexModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    MatInputModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

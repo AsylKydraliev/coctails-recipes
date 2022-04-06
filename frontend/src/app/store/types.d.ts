@@ -7,7 +7,6 @@ export type UserState = {
   loginLoading: boolean,
   loginError: null | LoginError,
   fbLoading: boolean,
-  googleLoading: boolean,
 };
 
 export type AppState = {
