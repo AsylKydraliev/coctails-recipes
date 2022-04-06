@@ -17,6 +17,7 @@ export class AddCocktailComponent implements OnInit {
   user: Observable<User | null>;
   error: Observable<null | string>;
   userId!: string;
+  addButtonDisabled = false;
 
   constructor(private store: Store<AppState>) {
     this.loading = store.select(state => state.cocktails.createLoading);
@@ -50,6 +51,7 @@ export class AddCocktailComponent implements OnInit {
   }
 
   addIngredient() {
+    this.addButtonDisabled = true;
     const ingredients = <FormArray>this.createForm.get('ingredients');
     const ingredientsGroup = new FormGroup({
       title: new FormControl('', Validators.required),

@@ -29,7 +29,7 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    avatar: null | String,
+    avatar: String,
     role: {
         type: String,
         required: true,

@@ -22,8 +22,8 @@
         <app-file-input name="image" formControlName="image"></app-file-input>
       </mat-form-field>
 
-      <div formArrayName="ingredients">
-        <button (click)="addIngredient()" type="button" mat-button>Add ingredients</button>
+      <div formArrayName="ingredients" class="addBtn">
+        <button (click)="addIngredient()" type="button" mat-raised-button>Add ingredients</button>
         <div *ngFor="let _ of getIngredientControls(); let i = index">
           <div [formGroupName]="i">
             <mat-form-field appearance="outline">
@@ -43,7 +43,7 @@
           type="submit"
           mat-raised-button
           color="primary"
-          [disabled]="f.invalid"
+          [disabled]="f.invalid || addButtonDisabled === false"
         >Add cocktail
         </button>
       </ng-template>

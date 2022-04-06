@@ -3,7 +3,7 @@ const multer = require("multer");
 const {nanoid} = require("nanoid");
 const Cocktail = require("../models/Cocktail");
 const path = require("path");
-const config = require("nodemon/lib/config");
+const config = require("../config");
 const authorization = require("../middleware/authorization");
 const permit = require("../middleware/permit");
 
@@ -32,13 +32,12 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', authorization, permit('user', 'admin'), upload.single('image'), async (req, res, next) => {
     try{
-        console.log(req.body)
         const cocktail = new Cocktail({
             user: req.body.user,
             title: req.body.title,
             image: null,
             recipe: req.body.recipe,
-            ingredients: req.body.ingredients
+            ingredients: JSON.parse(req.body.ingredients)
         })
 
         if(req.user.role === 'admin'){
