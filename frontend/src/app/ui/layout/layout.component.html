@@ -1,0 +1,58 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="[!(user | async) ? 'login':'trackHistory']">Track history</a>
+      <div *appRoles="['admin', 'user']">
+        <a mat-list-item routerLink="/addArtist">Add new artist</a>
+        <a mat-list-item routerLink="/addAlbum" >Add new album</a>
+        <a mat-list-item routerLink="/addTrack" >Add new track</a>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar
+      color="primary"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+    >
+      <div>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <a routerLink="/" mat-button fxLayoutAlign="center" class="logoLink">
+         <span class="material-icons">headphones</span>
+          iMusic
+         </a>
+      </div>
+      <nav *ngIf="!(user | async) else userMenu">
+        <a mat-button routerLink="registration">REGISTER</a>
+        <a mat-button routerLink="login">SIGN IN</a>
+      </nav>
+    </mat-toolbar>
+    <div class="content">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<ng-template #userMenu>
+  <nav>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="avatar">
+      <img [src]="api + '/uploads/' + (user | async)?.avatar" alt="avatar user">
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item disabled>{{ (user | async)?.email }}</button>
+      <a mat-menu-item routerLink="/profile">Profile</a>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </nav>
+</ng-template>

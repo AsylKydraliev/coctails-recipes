@@ -12,6 +12,12 @@ import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LayoutComponent } from './ui/layout/layout.component';
+import { FileInputComponent } from './ui/file-input/file-input.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -29,7 +35,9 @@ const socialConfig: SocialAuthServiceConfig = {
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LayoutComponent,
+    FileInputComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +47,11 @@ const socialConfig: SocialAuthServiceConfig = {
     AppStoreModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatListModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
