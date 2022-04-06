@@ -29,6 +29,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { RolesDirective } from './directives/roles.directive';
 import { HasRolesDirective } from './directives/has-roles.directive';
+import { CocktailsComponent } from './cocktails/cocktails.component';
+import { AddCocktailComponent } from './add-cocktail/add-cocktail.component';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -52,6 +54,8 @@ const socialConfig: SocialAuthServiceConfig = {
     ValidateIdenticalDirective,
     RolesDirective,
     HasRolesDirective,
+    CocktailsComponent,
+    AddCocktailComponent,
   ],
   imports: [
     BrowserModule,

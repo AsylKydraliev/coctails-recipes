@@ -6,7 +6,7 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <div *appRoles="['admin', 'user']">
-        <a mat-list-item routerLink="/addArtist">Add new artist</a>
+        <a mat-list-item routerLink="/addCocktail">Add new coctail</a>
       </div>
     </mat-nav-list>
   </mat-sidenav>
@@ -49,7 +49,7 @@
       <img [src]="api + '/uploads/' + (user | async)?.avatar" alt="avatar user">
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item disabled>{{ (user | async)?.email }}</button>
+      <button mat-menu-item disabled>{{ (user | async)?.displayName }}</button>
       <a mat-menu-item routerLink="/profile">Profile</a>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>

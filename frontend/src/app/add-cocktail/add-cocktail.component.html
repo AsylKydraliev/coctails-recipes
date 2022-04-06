@@ -1,0 +1,54 @@
+<h1>Add cocktail</h1>
+<mat-card>
+  <mat-card-content>
+    <div class="error" *ngIf="error | async">
+      {{ error | async }}
+    </div>
+    <form (ngSubmit)="onSubmit()" fxLayout="column" [formGroup]="createForm" #f="ngForm">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input name="title" formControlName="title" required matInput/>
+        <!--        <mat-error *ngIf="title.touched && title.hasError('required')">Title is required!</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Recipe</mat-label>
+        <textarea name="recipe" formControlName="recipe" required matInput></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Image</mat-label>
+        <app-file-input name="image" formControlName="image"></app-file-input>
+      </mat-form-field>
+
+      <div formArrayName="ingredients">
+        <button (click)="addIngredient()" type="button" mat-button>Add ingredients</button>
+        <div *ngFor="let _ of getIngredientControls(); let i = index">
+          <div [formGroupName]="i">
+            <mat-form-field appearance="outline">
+              <mat-label>Ingredient name</mat-label>
+              <input name="title" formControlName="title" required matInput/>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Amount</mat-label>
+              <input name="amount" formControlName="amount" required matInput/>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #btn>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="f.invalid"
+        >Add cocktail
+        </button>
+      </ng-template>
+      <mat-progress-bar mode="indeterminate" *ngIf="(loading | async) else btn"></mat-progress-bar>
+    </form>
+  </mat-card-content>
+</mat-card>
+

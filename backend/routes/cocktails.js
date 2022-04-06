@@ -32,6 +32,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', authorization, permit('user', 'admin'), upload.single('image'), async (req, res, next) => {
     try{
+        console.log(req.body)
         const cocktail = new Cocktail({
             user: req.body.user,
             title: req.body.title,
