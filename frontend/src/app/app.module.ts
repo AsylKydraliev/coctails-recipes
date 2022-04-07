@@ -32,6 +32,7 @@ import { HasRolesDirective } from './directives/has-roles.directive';
 import { CocktailsComponent } from './cocktails/cocktails.component';
 import { AddCocktailComponent } from './add-cocktail/add-cocktail.component';
 import { UserCocktailsComponent } from './cocktails/user-cocktails/user-cocktails.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -80,6 +81,7 @@ const socialConfig: SocialAuthServiceConfig = {
     MatSnackBarModule,
     MatButtonModule,
     MatInputModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

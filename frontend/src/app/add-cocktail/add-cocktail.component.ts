@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/types';
 import { createCocktailRequest } from '../store/cocktails/cocktails.actions';
@@ -11,20 +11,21 @@ import { User } from '../models/user.model';
   templateUrl: './add-cocktail.component.html',
   styleUrls: ['./add-cocktail.component.sass']
 })
-export class AddCocktailComponent implements OnInit {
+export class AddCocktailComponent implements OnInit, OnDestroy {
   createForm!: FormGroup;
   loading: Observable<boolean>;
   user: Observable<User | null>;
   error: Observable<null | string>;
   userId!: string;
   addButtonDisabled = false;
+  userSub!: Subscription;
 
   constructor(private store: Store<AppState>) {
     this.loading = store.select(state => state.cocktails.createLoading);
     this.error = store.select(state => state.cocktails.createError);
     this.user = store.select(state => state.users.user);
 
-    this.user.subscribe(user => {
+    this.userSub = this.user.subscribe(user => {
       this.userId = <string>user?._id;
     })
   }
@@ -75,5 +76,9 @@ export class AddCocktailComponent implements OnInit {
     const ingredients = <FormArray>this.createForm.get('ingredients');
     const field = ingredients.controls[index].get(fieldName);
     return Boolean(field && field.touched && field.errors?.[errorType]);
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 }

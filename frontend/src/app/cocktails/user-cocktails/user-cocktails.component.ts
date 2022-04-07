@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Observable, Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { environment } from '../../../environments/environment';
   templateUrl: './user-cocktails.component.html',
   styleUrls: ['./user-cocktails.component.sass']
 })
-export class UserCocktailsComponent implements OnInit {
+export class UserCocktailsComponent implements OnInit, OnDestroy {
   cocktails: Observable<Cocktail[]>;
   loading: Observable<boolean>;
   user: Observable<User | null>;
@@ -36,5 +36,4 @@ export class UserCocktailsComponent implements OnInit {
   ngOnDestroy() {
     this.userSub.unsubscribe();
   }
-
 }

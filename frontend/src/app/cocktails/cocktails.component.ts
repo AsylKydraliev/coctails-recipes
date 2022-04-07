@@ -14,9 +14,11 @@ import { environment } from '../../environments/environment';
 export class CocktailsComponent implements OnInit {
   api = environment.apiUrl;
   cocktails: Observable<Cocktail[]>;
+  loading: Observable<boolean>;
 
   constructor(private store: Store<AppState>) {
     this.cocktails = store.select(state => state.cocktails.cocktails);
+    this.loading = store.select(state => state.cocktails.fetchLoading);
   }
 
   ngOnInit() {
