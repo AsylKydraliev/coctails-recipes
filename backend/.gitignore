@@ -2,3 +2,10 @@ node_modules
 .idea
 public/uploads/*
 !public/uploads/.gitkeep
+!public/uploads/user.png
+!public/uploads/aperol.jpg
+!public/uploads/margarita.png
+!public/uploads/martini.jpg
+!public/uploads/Mary.jpeg
+!public/uploads/mojito.jpg
+!public/uploads/Whiskey.jpeg

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, map, mergeMap, Observable, of, tap } from 'rxjs';
 import { HelpersService } from '../../services/helpers.service';
 import { Router } from '@angular/router';
 import {
@@ -11,10 +11,16 @@ import {
   fetchCocktailsSuccess, fetchCocktailsUserFailure, fetchCocktailsUserRequest, fetchCocktailsUserSuccess
 } from './cocktails.actions';
 import { CocktailsService } from '../../services/cocktails.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../types';
+import { User } from '../../models/user.model';
 
 @Injectable()
 
 export class CocktailsEffects {
+  user: Observable<User | null>;
+  userRole!: string | undefined;
+
   fetchCocktails = createEffect(() => this.actions.pipe(
     ofType(fetchCocktailsRequest),
     mergeMap(() => this.cocktailsService.getAll().pipe(
@@ -40,7 +46,11 @@ export class CocktailsEffects {
     mergeMap(({cocktailData}) => this.cocktailsService.addCocktail(cocktailData).pipe(
         map(() => createCocktailSuccess()),
         tap(() => {
-          this.helpers.openSnackbar('Cocktail added');
+          if(this.userRole === 'admin'){
+            this.helpers.openSnackbar('Cocktail added');
+          }else {
+            this.helpers.openSnackbar('Your cocktail is being reviewed by a moderator');
+          }
           void this.router.navigate(['/']);
         }),
         catchError(() => of(createCocktailFailure({
@@ -77,5 +87,11 @@ export class CocktailsEffects {
     private actions: Actions,
     private helpers: HelpersService,
     private router: Router,
-  ) {}
+    private store: Store<AppState>,
+  ) {
+    this.user = store.select(state => state.users.user);
+    this.user.subscribe(user => {
+      this.userRole = user?.role;
+    })
+  }
 }
