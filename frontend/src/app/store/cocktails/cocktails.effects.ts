@@ -5,10 +5,15 @@ import { HelpersService } from '../../services/helpers.service';
 import { Router } from '@angular/router';
 import {
   createCocktailFailure,
-  createCocktailRequest, createCocktailSuccess,
+  createCocktailRequest,
+  createCocktailSuccess,
   fetchCocktailsFailure,
   fetchCocktailsRequest,
-  fetchCocktailsSuccess, fetchCocktailsUserFailure, fetchCocktailsUserRequest, fetchCocktailsUserSuccess
+  fetchCocktailsSuccess,
+  fetchCocktailsUserFailure,
+  fetchCocktailsUserRequest,
+  fetchCocktailsUserSuccess,
+  publishCocktailRequest, publishCocktailSuccess, removeCocktailsRequest, removeCocktailsSuccess
 } from './cocktails.actions';
 import { CocktailsService } from '../../services/cocktails.service';
 import { Store } from '@ngrx/store';
@@ -59,28 +64,29 @@ export class CocktailsEffects {
       )
     ))
   );
-  //
-  // publishAlbum = createEffect(() => this.actions.pipe(
-  //   ofType(publishAlbumRequest),
-  //   mergeMap(({albumPublish, id}) => this.albumsService.publishAlbum(albumPublish, id).pipe(
-  //       map(() => publishAlbumSuccess()),
-  //       tap(() => {
-  //         this.helpers.openSnackbar('Album published');
-  //       }),
-  //     )
-  //   ))
-  // );
-  //
-  // removeAlbum = createEffect(() => this.actions.pipe(
-  //   ofType(removeAlbumRequest),
-  //   mergeMap(({id}) => this.albumsService.removeAlbum(id).pipe(
-  //       map(() => removeAlbumSuccess()),
-  //       tap(() => {
-  //         this.helpers.openSnackbar('Album deleted');
-  //       }),
-  //     )
-  //   ))
-  // );
+
+  publishCocktail = createEffect(() => this.actions.pipe(
+    ofType(publishCocktailRequest),
+    mergeMap(({cocktailPublish, id}) => this.cocktailsService.published(cocktailPublish, id).pipe(
+        map(() => publishCocktailSuccess()),
+        tap(() => {
+          this.store.dispatch(fetchCocktailsRequest());
+          this.helpers.openSnackbar('Cocktail published');
+        }),
+      )
+    ))
+  );
+
+  removeCocktail = createEffect(() => this.actions.pipe(
+    ofType(removeCocktailsRequest),
+    mergeMap(({id}) => this.cocktailsService.remove(id).pipe(
+        map(() => removeCocktailsSuccess()),
+        tap(() => {
+          this.helpers.openSnackbar('Cocktail deleted');
+        }),
+      )
+    ))
+  );
 
   constructor(
     private cocktailsService: CocktailsService,

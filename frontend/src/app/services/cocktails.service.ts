@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cocktail, CocktailData, CocktailModel } from '../models/cocktail.model';
+import { Cocktail, CocktailData, CocktailModel, CocktailPublish } from '../models/cocktail.model';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
@@ -61,5 +61,13 @@ export class CocktailsService {
     })
 
     return this.http.post(environment.apiUrl + '/cocktails', formData);
+  }
+
+  published(cocktailPublish: CocktailPublish, id: string) {
+    return this.http.post(environment.apiUrl + '/cocktails/' + id + '/publish', cocktailPublish);
+  }
+
+  remove(id: string) {
+    return this.http.delete(environment.apiUrl + '/cocktails/' + id);
   }
 }

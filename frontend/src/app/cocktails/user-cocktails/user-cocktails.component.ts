@@ -2,8 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Observable, Subscription } from 'rxjs';
-import { Cocktail } from '../../models/cocktail.model';
-import { fetchCocktailsUserRequest } from '../../store/cocktails/cocktails.actions';
+import { Cocktail, CocktailPublish } from '../../models/cocktail.model';
+import {
+  fetchCocktailsUserRequest,
+  publishCocktailRequest,
+  removeCocktailsRequest
+} from '../../store/cocktails/cocktails.actions';
 import { User } from '../../models/user.model';
 import { environment } from '../../../environments/environment';
 
@@ -22,6 +26,9 @@ export class UserCocktailsComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<AppState>) {
     this.cocktails = store.select(state => state.cocktails.cocktails);
+    this.cocktails.subscribe(i => {
+      console.log(i)
+    })
     this.loading = store.select(state => state.cocktails.fetchLoading);
     this.user = store.select(state => state.users.user);
     this.userSub = this.user.subscribe(user => {
@@ -31,6 +38,18 @@ export class UserCocktailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.dispatch(fetchCocktailsUserRequest({userId: this.userId}));
+  }
+
+  onPublish(id: string) {
+    const cocktailPublish: CocktailPublish = {
+      isPublished: true,
+    }
+
+    this.store.dispatch(publishCocktailRequest({cocktailPublish: cocktailPublish, id: id}));
+  }
+
+  onRemove(id: string) {
+    this.store.dispatch(removeCocktailsRequest({id: id}));
   }
 
   ngOnDestroy() {

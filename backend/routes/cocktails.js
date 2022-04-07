@@ -22,10 +22,9 @@ const upload = multer({storage});
 
 router.get('/', async (req, res, next) => {
     try{
-        const query = {};
         if(req.query.user) {
-            query.user = {_id: req.query.user};
-            const cocktailsByUser = await Cocktail.find(query);
+            const cocktailsByUser = await Cocktail.find({user: req.query.user});
+
             return res.send(cocktailsByUser);
         }
 
@@ -59,6 +58,26 @@ router.post('/', authorization, permit('user', 'admin'), upload.single('image'),
 
         return res.send(cocktail);
     }catch (e) {
+        next(e);
+    }
+});
+
+router.post('/:id/publish', authorization, permit('admin'), async (req, res, next) => {
+    try{
+        await Cocktail.updateOne({_id: req.params.id}, {isPublished: req.body.isPublished});
+
+        return res.send({message: 'Cocktail published!'});
+    }catch (e){
+        next(e);
+    }
+});
+
+router.delete('/:id', authorization, permit('admin'), async (req, res, next) => {
+    try{
+        const album = await Cocktail.findByIdAndRemove({_id: req.params.id});
+
+        return res.send(album);
+    }catch (e){
         next(e);
     }
 });

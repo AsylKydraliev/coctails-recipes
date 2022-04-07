@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/types';
 import { Observable } from 'rxjs';
-import { Cocktail } from '../models/cocktail.model';
-import { fetchCocktailsRequest } from '../store/cocktails/cocktails.actions';
+import { Cocktail, CocktailPublish } from '../models/cocktail.model';
+import {
+  fetchCocktailsRequest,
+  publishCocktailRequest,
+  removeCocktailsRequest
+} from '../store/cocktails/cocktails.actions';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -23,5 +27,17 @@ export class CocktailsComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(fetchCocktailsRequest());
+  }
+
+  onPublish(id: string) {
+    const cocktailPublish: CocktailPublish = {
+      isPublished: true,
+    }
+
+    this.store.dispatch(publishCocktailRequest({cocktailPublish: cocktailPublish, id: id}));
+  }
+
+  onRemove(id: string) {
+    this.store.dispatch(removeCocktailsRequest({id: id}));
   }
 }

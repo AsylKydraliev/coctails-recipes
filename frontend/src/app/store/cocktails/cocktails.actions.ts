@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Cocktail, CocktailData } from '../../models/cocktail.model';
+import { Cocktail, CocktailData, CocktailPublish } from '../../models/cocktail.model';
 
 export const fetchCocktailsRequest = createAction(
   '[Cocktails] Fetch Request'
@@ -40,9 +40,9 @@ export const createCocktailFailure = createAction(
   props<{error: string | null}>()
 );
 
-// export const publishCocktailRequest = createAction('[Cocktail] Publish Request',
-//   props<{albumPublish: AlbumPublish, id: string}>());
-// export const publishAlbumSuccess = createAction('[Cocktail] Publish Success');
+export const publishCocktailRequest = createAction('[Cocktail] Publish Request',
+  props<{cocktailPublish: CocktailPublish, id: string}>());
+export const publishCocktailSuccess = createAction('[Cocktail] Publish Success');
 
 export const removeCocktailsRequest = createAction('[Cocktail] Remove Request',
   props<{id: string}>());

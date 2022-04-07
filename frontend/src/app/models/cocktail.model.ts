@@ -33,3 +33,7 @@ export interface CocktailData {
   recipe: string,
   ingredients: Ingredients[]
 }
+
+export interface CocktailPublish {
+  isPublished: boolean,
+}

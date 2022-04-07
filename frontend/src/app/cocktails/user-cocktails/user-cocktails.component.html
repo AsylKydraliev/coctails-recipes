@@ -10,12 +10,16 @@
       <mat-card-header fxLayoutAlign="space-between">
         <mat-card-title>{{ cocktail.title }}</mat-card-title>
         <div *appRoles="['admin']">
-          <span class="material-icons" *ngIf="cocktail.isPublished === false">publish</span>
+          <span
+            class="material-icons"
+            *ngIf="cocktail.isPublished === false"
+            (click)="onPublish(cocktail._id)"
+          >publish</span>
         </div>
       </mat-card-header>
       <img mat-card-image [src]="api + '/uploads/' + cocktail.image" alt="cocktail image">
       <mat-card-actions>
-        <button mat-button *appRoles="['admin']">DELETE</button>
+        <button mat-button *appRoles="['admin']" (click)="onRemove(cocktail._id)">DELETE</button>
       </mat-card-actions>
     </mat-card>
   </div>
