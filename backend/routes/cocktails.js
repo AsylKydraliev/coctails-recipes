@@ -36,6 +36,16 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/:id', async (req, res, next) => {
+    try{
+        const cocktail = await Cocktail.findOne({_id: req.params.id}).populate('user', 'displayName');
+
+        return res.send(cocktail);
+    }catch (e) {
+        next(e);
+    }
+});
+
 router.post('/', authorization, permit('user', 'admin'), upload.single('image'), async (req, res, next) => {
     try{
         const cocktail = new Cocktail({

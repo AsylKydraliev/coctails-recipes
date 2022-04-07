@@ -21,7 +21,7 @@
         </mat-card-header>
         <img mat-card-image [src]="api + '/uploads/' + cocktail.image" alt="cocktail image">
         <mat-card-actions>
-          <button mat-button>VIEW</button>
+          <button mat-button [routerLink]="['info', cocktail._id]">VIEW</button>
           <button mat-button *appRoles="['admin']" (click)="onRemove(cocktail._id)">DELETE</button>
         </mat-card-actions>
       </mat-card>

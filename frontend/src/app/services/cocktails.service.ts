@@ -47,6 +47,14 @@ export class CocktailsService {
     )
   };
 
+  getOneCocktail(id: string) {
+    return this.http.get<Cocktail>(environment.apiUrl + '/cocktails/' + id).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
   addCocktail(cocktailData: CocktailData) {
     const formData = new FormData();
 

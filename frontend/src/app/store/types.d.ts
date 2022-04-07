@@ -12,6 +12,7 @@ export type UserState = {
 
 export type CocktailState = {
   cocktails: Cocktail[],
+  cocktail: Cocktail | null,
   fetchLoading: boolean,
   fetchError: string | null,
   createLoading: boolean,

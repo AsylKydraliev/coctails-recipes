@@ -1,0 +1,18 @@
+<div>
+  <mat-card class="example-card">
+    <div fxLayoutAlign="start">
+      <img mat-card-xl-image [src]="api + '/uploads/' + infoCocktail?.image" alt="image cocktail">
+      <div>
+        <h1>{{ infoCocktail?.title }}</h1>
+        <h2>Ingredients:</h2>
+        <ul *ngFor="let ingredient of infoCocktail?.ingredients">
+          <li>{{ ingredient.title }} - {{ ingredient.amount }}</li>
+        </ul>
+      </div>
+    </div>
+    <mat-card-content>
+      <p><strong>Cocktail recipe:</strong></p>
+      {{ infoCocktail?.recipe }}
+    </mat-card-content>
+  </mat-card>
+</div>

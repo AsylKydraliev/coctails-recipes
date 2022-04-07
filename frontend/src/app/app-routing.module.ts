@@ -6,6 +6,7 @@ import { NotFoundComponent } from './not-found.component';
 import { CocktailsComponent } from './cocktails/cocktails.component';
 import { AddCocktailComponent } from './add-cocktail/add-cocktail.component';
 import { UserCocktailsComponent } from './cocktails/user-cocktails/user-cocktails.component';
+import { CocktailInfoComponent } from './cocktails/cocktail-info/cocktail-info.component';
 
 const routes: Routes = [
   {path: '', component: CocktailsComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'addCocktail', component: AddCocktailComponent},
   {path: 'cocktails/:id', component: UserCocktailsComponent},
+  {path: 'info/:id', component: CocktailInfoComponent},
   {path: '**', component: NotFoundComponent},
 ];
 

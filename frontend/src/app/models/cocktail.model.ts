@@ -1,6 +1,9 @@
 export interface Cocktail {
   readonly _id: string,
-  readonly user: string,
+  readonly user: {
+    _id: string,
+    displayName: string
+  },
   readonly title: string,
   readonly image: string,
   readonly recipe: string,
@@ -16,7 +19,10 @@ export interface Ingredients {
 export class CocktailModel {
   constructor(
     public _id: string,
-    public user: string,
+    public user: {
+      _id: string,
+      displayName: string
+    },
     public title: string,
     public image: string,
     public recipe: string,

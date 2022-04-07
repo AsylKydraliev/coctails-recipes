@@ -33,6 +33,7 @@ import { CocktailsComponent } from './cocktails/cocktails.component';
 import { AddCocktailComponent } from './add-cocktail/add-cocktail.component';
 import { UserCocktailsComponent } from './cocktails/user-cocktails/user-cocktails.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CocktailInfoComponent } from './cocktails/cocktail-info/cocktail-info.component';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -59,6 +60,7 @@ const socialConfig: SocialAuthServiceConfig = {
     CocktailsComponent,
     AddCocktailComponent,
     UserCocktailsComponent,
+    CocktailInfoComponent,
   ],
   imports: [
     BrowserModule,

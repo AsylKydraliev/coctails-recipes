@@ -84,7 +84,7 @@ const run = async () => {
                 {title: 'Orange aperitif', amount: '1.5 fluid'},
                 {title: 'Orange', amount: '1 slice'},
             ],
-            isPublished: false,
+            isPublished: true,
         }, {
             user: admin,
             title: 'Bloody Mary',

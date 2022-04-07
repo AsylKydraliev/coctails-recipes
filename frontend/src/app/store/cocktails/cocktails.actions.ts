@@ -14,6 +14,20 @@ export const fetchCocktailsFailure = createAction(
 );
 
 
+export const fetchCocktailInfoRequest = createAction(
+  '[Cocktail] Fetch Request',
+  props<{id: string}>()
+);
+export const fetchCocktailInfoSuccess = createAction(
+  '[Cocktail] Fetch Success',
+  props<{cocktail: Cocktail}>()
+);
+export const fetchCocktailInfoFailure = createAction(
+  '[Cocktail] Fetch Failure',
+  props<{error: string}>()
+);
+
+
 export const fetchCocktailsUserRequest = createAction(
   '[CocktailsUser] Fetch Request',
    props<{userId: string}>()

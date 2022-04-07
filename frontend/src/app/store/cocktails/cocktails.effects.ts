@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import {
   createCocktailFailure,
   createCocktailRequest,
-  createCocktailSuccess,
+  createCocktailSuccess, fetchCocktailInfoFailure, fetchCocktailInfoRequest, fetchCocktailInfoSuccess,
   fetchCocktailsFailure,
   fetchCocktailsRequest,
   fetchCocktailsSuccess,
@@ -35,6 +35,16 @@ export class CocktailsEffects {
       })))
     )
   )));
+
+  fetchCocktailInfo = createEffect(() => this.actions.pipe(
+    ofType(fetchCocktailInfoRequest),
+    mergeMap(({id}) => this.cocktailsService.getOneCocktail(id).pipe(
+        map(cocktail => fetchCocktailInfoSuccess({cocktail})),
+        catchError(() => of(fetchCocktailInfoFailure({
+          error: 'Something went wrong'
+        })))
+      )
+    )));
 
   fetchCocktailsByUser = createEffect(() => this.actions.pipe(
     ofType(fetchCocktailsUserRequest),

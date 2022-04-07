@@ -26,9 +26,6 @@ export class UserCocktailsComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<AppState>) {
     this.cocktails = store.select(state => state.cocktails.cocktails);
-    this.cocktails.subscribe(i => {
-      console.log(i)
-    })
     this.loading = store.select(state => state.cocktails.fetchLoading);
     this.user = store.select(state => state.users.user);
     this.userSub = this.user.subscribe(user => {
