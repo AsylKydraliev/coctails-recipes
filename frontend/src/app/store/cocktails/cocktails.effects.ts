@@ -8,7 +8,7 @@ import {
   createCocktailRequest, createCocktailSuccess,
   fetchCocktailsFailure,
   fetchCocktailsRequest,
-  fetchCocktailsSuccess
+  fetchCocktailsSuccess, fetchCocktailsUserFailure, fetchCocktailsUserRequest, fetchCocktailsUserSuccess
 } from './cocktails.actions';
 import { CocktailsService } from '../../services/cocktails.service';
 
@@ -17,13 +17,23 @@ import { CocktailsService } from '../../services/cocktails.service';
 export class CocktailsEffects {
   fetchCocktails = createEffect(() => this.actions.pipe(
     ofType(fetchCocktailsRequest),
-    mergeMap(id => this.cocktailsService.getAll().pipe(
+    mergeMap(() => this.cocktailsService.getAll().pipe(
       map(cocktails => fetchCocktailsSuccess({cocktails})),
       catchError(() => of(fetchCocktailsFailure({
         error: 'Something went wrong'
       })))
     )
   )));
+
+  fetchCocktailsByUser = createEffect(() => this.actions.pipe(
+    ofType(fetchCocktailsUserRequest),
+    mergeMap(({userId}) => this.cocktailsService.getCocktailsByUser(userId).pipe(
+        map(cocktails => fetchCocktailsUserSuccess({cocktails})),
+        catchError(() => of(fetchCocktailsUserFailure({
+          error: 'Something went wrong'
+        })))
+      )
+    )));
 
   createCocktail = createEffect(() => this.actions.pipe(
     ofType(createCocktailRequest),

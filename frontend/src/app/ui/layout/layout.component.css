@@ -45,3 +45,12 @@
   width: 50px;
   height: 50px;
 }
+
+.cocktail-link{
+  font-size: 1.2rem;
+  font-family: 'Prompt', sans-serif;
+}
+
+.cocktail-link:hover{
+  border-bottom: 1px solid white;
+}

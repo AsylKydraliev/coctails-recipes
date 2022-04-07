@@ -29,6 +29,24 @@ export class CocktailsService {
     )
   };
 
+  getCocktailsByUser(id: string) {
+    return this.http.get<Cocktail[]>(environment.apiUrl + `/cocktails?user=${id}`).pipe(
+      map(response => {
+        return response.map(cocktails => {
+          return new CocktailModel(
+            cocktails._id,
+            cocktails.user,
+            cocktails.title,
+            cocktails.image,
+            cocktails.recipe,
+            cocktails.isPublished,
+            cocktails.ingredients,
+          )
+        });
+      }),
+    )
+  };
+
   addCocktail(cocktailData: CocktailData) {
     const formData = new FormData();
 

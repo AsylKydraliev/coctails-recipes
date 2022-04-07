@@ -31,6 +31,7 @@ import { RolesDirective } from './directives/roles.directive';
 import { HasRolesDirective } from './directives/has-roles.directive';
 import { CocktailsComponent } from './cocktails/cocktails.component';
 import { AddCocktailComponent } from './add-cocktail/add-cocktail.component';
+import { UserCocktailsComponent } from './cocktails/user-cocktails/user-cocktails.component';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -56,6 +57,7 @@ const socialConfig: SocialAuthServiceConfig = {
     HasRolesDirective,
     CocktailsComponent,
     AddCocktailComponent,
+    UserCocktailsComponent,
   ],
   imports: [
     BrowserModule,

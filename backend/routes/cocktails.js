@@ -22,6 +22,13 @@ const upload = multer({storage});
 
 router.get('/', async (req, res, next) => {
     try{
+        const query = {};
+        if(req.query.user) {
+            query.user = {_id: req.query.user};
+            const cocktailsByUser = await Cocktail.find(query);
+            return res.send(cocktailsByUser);
+        }
+
         const cocktails = await Cocktail.find();
 
         return res.send(cocktails);

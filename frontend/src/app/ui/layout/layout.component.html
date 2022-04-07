@@ -45,6 +45,8 @@
 
 <ng-template #userMenu>
   <nav>
+    <a mat-button [routerLink]="['cocktails', (user | async)?._id]" class="cocktail-link">My cocktails</a>
+
     <button mat-icon-button [matMenuTriggerFor]="menu" class="avatar">
       <img [src]="api + '/uploads/' + (user | async)?.avatar" alt="avatar user">
     </button>

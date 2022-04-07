@@ -5,7 +5,7 @@ import {
   createCocktailRequest, createCocktailSuccess,
   fetchCocktailsFailure,
   fetchCocktailsRequest,
-  fetchCocktailsSuccess
+  fetchCocktailsSuccess, fetchCocktailsUserFailure, fetchCocktailsUserRequest, fetchCocktailsUserSuccess
 } from './cocktails.actions';
 
 const initialState: CocktailState = {
@@ -22,6 +22,10 @@ export const cocktailsReducer = createReducer(
   on(fetchCocktailsRequest, state => ({...state, fetchLoading: true})),
   on(fetchCocktailsSuccess, (state, {cocktails}) => ({...state, fetchLoading: false, cocktails})),
   on(fetchCocktailsFailure, (state, {error}) => ({...state, fetchLoading: true, fetchError: error})),
+
+  on(fetchCocktailsUserRequest, state => ({...state, fetchLoading: true})),
+  on(fetchCocktailsUserSuccess, (state, {cocktails}) => ({...state, fetchLoading: false, cocktails})),
+  on(fetchCocktailsUserFailure, (state, {error}) => ({...state, fetchLoading: true, fetchError: error})),
 
   on(createCocktailRequest, state => ({...state, createLoading: true})),
   on(createCocktailSuccess, state => ({...state, createLoading: false})),
