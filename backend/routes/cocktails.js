@@ -82,11 +82,25 @@ router.post('/:id/publish', authorization, permit('admin'), async (req, res, nex
     }
 });
 
+router.put('/:id/rating', async (req, res, next) => {
+    try{
+        const rating = {
+            user: req.body.user,
+            grade: JSON.parse(req.body.grade),
+        }
+        const cocktail = await Cocktail.findByIdAndUpdate({_id: req.params.id}, {rating: rating});
+
+        return res.send(cocktail);
+    }catch (e){
+        next(e);
+    }
+});
+
 router.delete('/:id', authorization, permit('admin'), async (req, res, next) => {
     try{
-        const album = await Cocktail.findByIdAndRemove({_id: req.params.id});
+        const cocktail = await Cocktail.findByIdAndRemove({_id: req.params.id});
 
-        return res.send(album);
+        return res.send(cocktail);
     }catch (e){
         next(e);
     }

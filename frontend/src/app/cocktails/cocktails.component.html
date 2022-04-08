@@ -3,7 +3,7 @@
 ></mat-progress-spinner>
 
 <ng-template #cocktailsArea>
-  <div fxLayout="row wrap">
+  <div fxLayout="column">
     <div class="content" *ngFor="let cocktail of cocktails | async">
       <mat-card
         class="example-card"

@@ -60,11 +60,13 @@ export class UsersEffects {
   logoutUser = createEffect(() => this.actions.pipe(
     ofType(logoutUserRequest),
     mergeMap(() => this.usersService.logoutUser().pipe(
-      map(() => logoutUser()),
-      tap(() => {
+      map(() => {
         void this.auth.signOut();
+        return logoutUser();
+      }),
+      tap(async () => {
         this.helpers.openSnackbar('Logout successful');
-        void this.router.navigate(['/']);
+        await this.router.navigate(['/']);
       })
     ))
   ))

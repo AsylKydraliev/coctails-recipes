@@ -1,9 +1,13 @@
 <div>
   <mat-card class="example-card">
     <div fxLayoutAlign="start">
-      <img mat-card-xl-image [src]="api + '/uploads/' + infoCocktail?.image" alt="image cocktail">
+      <img mat-card-xl-image *ngIf="infoCocktail?.image"
+           [src]="api + '/uploads/' + infoCocktail?.image" alt="image cocktail">
       <div>
         <h1>{{ infoCocktail?.title }}</h1>
+        <p>
+          <strong>Rating: </strong>{{ starRating }}
+        </p>
         <h2>Ingredients:</h2>
         <ul *ngFor="let ingredient of infoCocktail?.ingredients">
           <li>{{ ingredient.title }} - {{ ingredient.amount }}</li>
@@ -14,5 +18,14 @@
       <p><strong>Cocktail recipe:</strong></p>
       {{ infoCocktail?.recipe }}
     </mat-card-content>
+    <hr>
+    <div>
+      <strong>Rate:</strong>&nbsp;
+      <ngb-rating
+        [max]="5" [(ngModel)]="starRating"
+        [readonly]="false"
+        (click)="onEstimate()"
+      ></ngb-rating>
+    </div>
   </mat-card>
 </div>

@@ -14,7 +14,7 @@ const IngredientSchema = new Schema({
 
 const RatingSchema = new Schema({
     user: String,
-    grade: String
+    grade: Number
 });
 
 const CocktailSchema = new Schema({

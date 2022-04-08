@@ -1,6 +1,7 @@
 import { CocktailState } from '../types';
 import { createReducer, on } from '@ngrx/store';
 import {
+  addRatingRequest, addRatingSuccess,
   createCocktailFailure,
   createCocktailRequest,
   createCocktailSuccess, fetchCocktailInfoFailure, fetchCocktailInfoRequest, fetchCocktailInfoSuccess,
@@ -43,6 +44,9 @@ export const cocktailsReducer = createReducer(
 
   on(publishCocktailRequest, state => ({...state, publishLoading: true})),
   on(publishCocktailSuccess, state => ({...state, publishLoading: false})),
+
+  on(addRatingRequest, state => ({...state, fetchLoading: true})),
+  on(addRatingSuccess, (state, {cocktail}) => ({...state, fetchLoading: false, cocktail})),
 
   on(removeCocktailsRequest, (state, {id}) => {
     const update = state.cocktails.filter(cocktail => {

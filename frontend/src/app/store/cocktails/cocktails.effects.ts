@@ -4,6 +4,7 @@ import { catchError, map, mergeMap, Observable, of, tap } from 'rxjs';
 import { HelpersService } from '../../services/helpers.service';
 import { Router } from '@angular/router';
 import {
+  addRatingRequest, addRatingSuccess,
   createCocktailFailure,
   createCocktailRequest,
   createCocktailSuccess, fetchCocktailInfoFailure, fetchCocktailInfoRequest, fetchCocktailInfoSuccess,
@@ -25,6 +26,7 @@ import { User } from '../../models/user.model';
 export class CocktailsEffects {
   user: Observable<User | null>;
   userRole!: string | undefined;
+  userId!: string;
 
   fetchCocktails = createEffect(() => this.actions.pipe(
     ofType(fetchCocktailsRequest),
@@ -98,6 +100,17 @@ export class CocktailsEffects {
     ))
   );
 
+  ratingCocktail = createEffect(() => this.actions.pipe(
+    ofType(addRatingRequest),
+    mergeMap(({cocktailRating, id}) => this.cocktailsService.addRating(cocktailRating, id).pipe(
+        map(cocktail => addRatingSuccess({cocktail})),
+        tap(() => {
+          this.store.dispatch(fetchCocktailsUserRequest(({userId: this.userId})));
+        })
+      )
+    ))
+  );
+
   constructor(
     private cocktailsService: CocktailsService,
     private actions: Actions,
@@ -108,6 +121,7 @@ export class CocktailsEffects {
     this.user = store.select(state => state.users.user);
     this.user.subscribe(user => {
       this.userRole = user?.role;
+      this.userId = <string>user?._id
     })
   }
 }

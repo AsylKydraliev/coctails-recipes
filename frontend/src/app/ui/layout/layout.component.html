@@ -48,11 +48,11 @@
     <a mat-button [routerLink]="['cocktails', (user | async)?._id]" class="cocktail-link">My cocktails</a>
 
     <button mat-icon-button [matMenuTriggerFor]="menu" class="avatar">
-      <img [src]="api + '/uploads/' + (user | async)?.avatar" alt="avatar user">
+      <img *ngIf="(user | async)?.avatar" [src]="api + '/uploads/' + (user | async)?.avatar" alt="avatar user">
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item disabled>{{ (user | async)?.displayName }}</button>
-      <a mat-menu-item routerLink="/profile">Profile</a>
+      <a mat-menu-item>Profile</a>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   </nav>

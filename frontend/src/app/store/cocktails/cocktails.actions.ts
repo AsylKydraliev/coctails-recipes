@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Cocktail, CocktailData, CocktailPublish } from '../../models/cocktail.model';
+import { Cocktail, CocktailData, CocktailPublish, Rating } from '../../models/cocktail.model';
 
 export const fetchCocktailsRequest = createAction(
   '[Cocktails] Fetch Request'
@@ -61,3 +61,7 @@ export const publishCocktailSuccess = createAction('[Cocktail] Publish Success')
 export const removeCocktailsRequest = createAction('[Cocktail] Remove Request',
   props<{id: string}>());
 export const removeCocktailsSuccess = createAction('[Cocktail] Remove Success');
+
+export const addRatingRequest = createAction('[Cocktail] AddRating Request',
+  props<{cocktailRating: Rating, id: string}>());
+export const addRatingSuccess = createAction('[Cocktail] AddRating Success', props<{ cocktail: Cocktail }>());

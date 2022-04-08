@@ -34,6 +34,7 @@ import { AddCocktailComponent } from './add-cocktail/add-cocktail.component';
 import { UserCocktailsComponent } from './cocktails/user-cocktails/user-cocktails.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CocktailInfoComponent } from './cocktails/cocktail-info/cocktail-info.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -84,6 +85,7 @@ const socialConfig: SocialAuthServiceConfig = {
     MatButtonModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    NgbModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
