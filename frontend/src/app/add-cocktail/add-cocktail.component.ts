@@ -3,13 +3,8 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/types';
-import {
-  createCocktailRequest,
-  publishCocktailRequest,
-  removeCocktailsRequest
-} from '../store/cocktails/cocktails.actions';
+import { createCocktailRequest } from '../store/cocktails/cocktails.actions';
 import { User } from '../models/user.model';
-import { CocktailPublish } from '../models/cocktail.model';
 
 @Component({
   selector: 'app-add-cocktail',
@@ -60,7 +55,7 @@ export class AddCocktailComponent implements OnInit, OnDestroy {
     this.addButtonDisabled = true;
     const ingredients = <FormArray>this.createForm.get('ingredients');
     const ingredientsGroup = new FormGroup({
-      title: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required),
       amount: new FormControl('', Validators.required),
     })
 

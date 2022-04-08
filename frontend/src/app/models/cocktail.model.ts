@@ -13,7 +13,7 @@ export interface Cocktail {
 }
 
 export interface Ingredients {
-  readonly title: string,
+  readonly name: string,
   readonly amount: string
 }
 

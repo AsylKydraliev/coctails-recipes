@@ -29,8 +29,8 @@
           <div [formGroupName]="i">
             <mat-form-field appearance="outline">
               <mat-label>Ingredient name</mat-label>
-              <input name="title" formControlName="title" required matInput/>
-              <mat-error *ngIf="fieldHasError('title', 'required')">Ingredient name is required!</mat-error>
+              <input name="name" formControlName="name" required matInput/>
+              <mat-error *ngIf="ingredientsHasError('name', 'required', i)">Ingredient name is required!</mat-error>
             </mat-form-field>&nbsp;
             <mat-form-field appearance="outline">
               <mat-label>Amount</mat-label>
