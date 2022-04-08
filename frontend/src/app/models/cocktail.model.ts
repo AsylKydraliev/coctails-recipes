@@ -8,12 +8,18 @@ export interface Cocktail {
   readonly image: string,
   readonly recipe: string,
   readonly isPublished: boolean,
-  readonly ingredients: Ingredients[]
+  readonly ingredients: Ingredients[],
+  readonly rating: Rating[],
 }
 
 export interface Ingredients {
   readonly title: string,
   readonly amount: string
+}
+
+export interface Rating {
+  readonly user: string,
+  readonly grade: string
 }
 
 export class CocktailModel {
@@ -27,7 +33,8 @@ export class CocktailModel {
     public image: string,
     public recipe: string,
     public isPublished: boolean,
-    public ingredients: Ingredients[]
+    public ingredients: Ingredients[],
+    public rating: Rating[],
   ) {}
 }
 

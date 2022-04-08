@@ -88,7 +88,7 @@ const run = async () => {
         }, {
             user: admin,
             title: 'Bloody Mary',
-            image: 'Mary.jpeg',
+            image: 'mary.jpg',
             recipe: 'Salt the rim of a tall glass. To do so, pour salt onto a small plate, moisten the rim of the glass on a damp towel and press into the salt. Fill the glass with ice cubes.!',
             ingredients: [
                 {title: 'Jigger vodka', amount: '1.5 fluid'},

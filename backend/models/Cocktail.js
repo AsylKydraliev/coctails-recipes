@@ -12,6 +12,11 @@ const IngredientSchema = new Schema({
     }
 });
 
+const RatingSchema = new Schema({
+    user: String,
+    grade: String
+});
+
 const CocktailSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
@@ -37,7 +42,8 @@ const CocktailSchema = new Schema({
     ingredients: {
         type: [IngredientSchema],
         required: true
-    }
+    },
+    rating: [RatingSchema]
 });
 
 const Cocktail = mongoose.model('Cocktail', CocktailSchema);

@@ -23,6 +23,7 @@ export class CocktailsService {
             cocktails.recipe,
             cocktails.isPublished,
             cocktails.ingredients,
+            cocktails.rating,
           )
         });
       }),
@@ -41,6 +42,7 @@ export class CocktailsService {
             cocktails.recipe,
             cocktails.isPublished,
             cocktails.ingredients,
+            cocktails.rating,
           )
         });
       }),
