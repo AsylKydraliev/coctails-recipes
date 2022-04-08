@@ -37,6 +37,9 @@
               <input name="amount" formControlName="amount" required matInput/>
               <mat-error *ngIf="ingredientsHasError('amount', 'required', i)">Ingredient amount is required!</mat-error>
             </mat-form-field>
+            <span class="material-icons" (click)="arrayElementRemove(i)">
+              clear
+            </span>
           </div>
         </div>
       </div>

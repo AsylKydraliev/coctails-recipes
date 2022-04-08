@@ -78,6 +78,11 @@ export class AddCocktailComponent implements OnInit, OnDestroy {
     return Boolean(field && field.touched && field.errors?.[errorType]);
   }
 
+  arrayElementRemove(index: number){
+    const ingredients = <FormArray>this.createForm.get('ingredients');
+    ingredients.removeAt(index);
+  }
+
   ngOnDestroy() {
     this.userSub.unsubscribe();
   }
